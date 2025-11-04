@@ -45,9 +45,9 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Student $student)
     {
-        //
+        return view('admin.students.show', compact('student'));
     }
 
     /**
@@ -55,24 +55,28 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        return view('admin.student.edit', compact('student'));
+        return view('admin.students.edit', compact('student'));
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Student $student)
-    {
-        $valitaded = $request->validate([
-            'nis' => 'required',
-            'nama_lengkap' => 'required',
-            'jenis_kelamin' => 'required',
-            'nisn' => 'required',
-        ]);
+{
+    // Validasi input — untuk field unik kita ignore id student saat ini
+    $validated = $request->validate([
+        'nis' => 'required|unique:students,nis,' . $student->id,
+        'nama_lengkap' => 'required|string|max:255',
+        'jenis_kelamin' => 'required|in:L,P',
+        'nisn' => 'required|unique:students,nisn,' . $student->id,
+    ]);
 
-        $student->update($validated);
-        return redirect()->route('admin.students.index')->with('success', 'Data siswa berhasil diperbarui');
-    }
+    // Update record
+    $student->update($validated);
+
+    // Redirect kembali dengan pesan sukses
+    return redirect()->route('admin.students.index')->with('success', 'Data siswa berhasil diupdate!');
+}
 
     /**
      * Remove the specified resource from storage.
