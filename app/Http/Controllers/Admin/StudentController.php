@@ -79,6 +79,10 @@ class StudentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+         $student = \App\Models\Student::findOrFail($id);
+    $student->delete();
+
+    return redirect()->route('admin.students.index')
+                     ->with('success', 'Data siswa berhasil dihapus!');
     }
 }
