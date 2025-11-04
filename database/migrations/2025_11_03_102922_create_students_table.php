@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('students', function (Blueprint $table) {
-            $table->id();
-            $table->string('nis')->unique();
-            $table->string('nama_lengksp');
-            $table->enum('jenis_kelamin', ['L', 'P']);
-            $table->string('nisn')->nullable();
-            $table->timestamps();
+       Schema::create('students', function (Blueprint $table) {
+        $table->id();
+        $table->string('nis')->unique();
+        $table->string('nama_lengkap');
+        $table->string('jenis_kelamin', 1);
+        $table->string('nisn')->unique();
+        $table->timestamps();
         });
     }
 
