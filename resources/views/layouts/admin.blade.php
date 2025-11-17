@@ -50,10 +50,33 @@
 <body>
     <div class="sidebar">
         <h5 class="text-center mt-2">Dilesin Admin</h5>
-        <a href="{{ url('/admin/dashboard') }}" class="{{ request()->is('admin/dashboard') ? 'active' : '' }}">Dashboard</a>
-        <a href="{{ url('/admin/students') }}" class="{{ request()->is('admin/students*') ? 'active' : '' }}">Students</a>
-        <a href="{{ url('/admin/users') }}" class="{{ request()->is('admin/users*') ? 'active' : '' }}">Users</a>
-        <a href="{{ url('/admin/settings') }}" class="{{ request()->is('admin/settings*') ? 'active' : '' }}">Settings</a>
+
+        <a href="{{ url('/admin/dashboard') }}" 
+           class="{{ request()->is('admin/dashboard') ? 'active' : '' }}">
+           Dashboard
+        </a>
+
+        <a href="{{ url('/admin/students') }}" 
+           class="{{ request()->is('admin/students*') ? 'active' : '' }}">
+           Students
+        </a>
+
+        <!-- ✅ MENU ABSENSI BARU -->
+        <a href="{{ url('/admin/attendances') }}" 
+           class="{{ request()->is('admin/attendances*') ? 'active' : '' }}">
+           Absensi
+        </a>
+        <!-- END -->
+
+        <a href="{{ url('/admin/users') }}" 
+           class="{{ request()->is('admin/users*') ? 'active' : '' }}">
+           Users
+        </a>
+
+        <a href="{{ url('/admin/settings') }}" 
+           class="{{ request()->is('admin/settings*') ? 'active' : '' }}">
+           Settings
+        </a>
     </div>
 
     <div class="main-content">
@@ -61,9 +84,11 @@
             <span>Home</span>
             <span>Admin</span>
         </div>
+
         <main class="p-4">
             @yield('content')
         </main>
+
         <footer class="text-center py-3 text-muted border-top">
             © 2025 Dilesin Academy. All rights reserved.
         </footer>

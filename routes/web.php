@@ -3,8 +3,8 @@
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Admin\AttendanceController; // ← Tambahkan ini!
 
-// Redirect halaman utama ke dashboard admin
 Route::get('/', function () {
     return redirect()->route('admin.dashboard');
 });
@@ -12,5 +12,5 @@ Route::get('/', function () {
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('students', StudentController::class);
-    Route::resource('admin/attendances', App\Http\Controllers\Admin\AttendanceController::class);
+    Route::resource('attendances', AttendanceController::class);
 });
