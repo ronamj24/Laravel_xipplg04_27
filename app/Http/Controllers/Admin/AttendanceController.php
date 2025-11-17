@@ -22,7 +22,8 @@ class AttendanceController extends Controller
      */
     public function create()
     {
-        //
+        $students = Student::all();
+    return view('admin.attendances.create', compact('students'));
     }
 
     /**
@@ -30,7 +31,8 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         Attendance::create($request->all());
+    return redirect()->route('admin.attendances.index');
     }
 
     /**
